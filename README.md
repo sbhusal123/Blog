@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 ```
 
 ### 1.2 Setting Up Database ###
-First of all create a database named *__restTestDB__* then in the **settings**.**py** file change default database as :
+First of all create a database named **<database_name>** then in the **settings**.**py** file change default database as :
 
 ```python
 DATABASES = {
