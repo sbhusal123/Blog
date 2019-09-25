@@ -2,7 +2,7 @@
 Hands on django rest framework.
 
 ## 1. Installation ##
-Install the packages **django, djangorestframework** on virtual environment:
+Install the packages **django** on virtual environment:
 
     i.  pip install django    
     ii. pip install mysqlclient
