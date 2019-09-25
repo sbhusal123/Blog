@@ -59,7 +59,7 @@ DATABASES = {
     }
 }
 ```
-* Then create migrations to append changes on databases : `python manage.py makemigrations <app_name>`. Basically what this does is creates a **.py** file for performing changes to the database you've created. Those  files for performing migrations is located at **app_name/migrations** directory.
+* Then create migrations to append changes on databases : ```python manage.py makemigrations <app_name>```. Basically what this does is creates a **.py** file for performing changes to the database you've created. Those  files for performing migrations is located at **app_name/migrations** directory.
 
 * Now migrate the state of database from one state to another: `python manage.py migrate`. Actually what this does is executes .py files we've discussed above.
 
