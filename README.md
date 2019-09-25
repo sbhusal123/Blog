@@ -21,6 +21,7 @@ Install python3-dev, build-essential,GCC builder to convert library into binarie
 
 ### 1.1 Setup ###
 i. Create a django project `django-admin startproject <project_name>`
+
 ii. Create an app switching to directory where **manage**.**py** is located:
 * `python manage.py startapp <appname>`
 * Now add the app thus created to the **INSTALLED_APPS** application under **settings**.py:
