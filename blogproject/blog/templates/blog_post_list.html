@@ -5,17 +5,11 @@
 {%endblock%}
 
 {%block content%}
-
-    <div class="container">
-        <div class="row">
-            <div class="col-6 mx-auto">
-                <ul>
-                    {%for obj in objects%}
-                    <li><h5>{{obj.title}}</h5></li>
-                    {%endfor%}
-                </ul>
-            </div>
-        </div>
-    </div>
+    <br>
+    <ul>
+        {%for obj in objects%}
+            {% include "list-inline.html" with blog_post=obj truncate=True%}
+        {%endfor%}
+    </ul>
 
 {%endblock%}

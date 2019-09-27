@@ -91,15 +91,21 @@ def blog_post_update(request,slug):
 
     if form.is_valid():
         form.save()
-        return redirect("/blog/list")
+        return redirect("/blog/")
 
     template_name = "blog_post_update.html"
     context = {"form": form}
     return render(request, template_name,context)
 
+@staff_member_required
+def blog_post_delete(request,slug):
 
-def blog_post_delete(request):
-    obj = []
+    obj = get_object_or_404(BlogPosts,slug=slug)
+
+    if request.method == "POST":
+        obj.delete()
+        return redirect("/blog/")
+
     template_name = "blog_post_delete.html"
     context = {"object": obj}
     return render(request, template_name, context)

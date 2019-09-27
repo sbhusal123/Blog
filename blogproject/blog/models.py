@@ -29,5 +29,14 @@ class BlogPosts(models.Model):
         super(BlogPosts,self).save(*args,**kwargs)
         return
 
-    # def __str__(self):
-    #     return self.title
+    def __str__(self):
+        return self.title
+
+    def get_read_url(self):
+        return f'/blog/{self.slug}'
+
+    def get_edit_url(self):
+        return f'{self.get_read_url()}/edit'
+
+    def get_delete_url(self):
+        return f'{self.get_read_url()}/delete'

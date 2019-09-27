@@ -1,17 +1,12 @@
 {%extends 'base.html' %}
 
 {%block title%}
-    Home
+    Home | Django Blog
 {%endblock%}
 
 {%block content%}
-
-<div class="container">
-    <div class="row">
-        <div class="col-6 md-default">
-            <h1>Hello this is homepage.</h1>
-        </div>
-    </div>
-</div>
-
+    <br>
+    {%for bl in blog_list%}
+        {%include 'list-inline.html' with blog_post=bl truncate=True detail=False%}
+    {%endfor%}
 {%endblock%}
