@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from .models import BlogPosts
 from django.http import Http404
 from .forms import BlogPostForm,BlogPostModelForm
@@ -14,7 +14,6 @@ def blog_post_list(request):
     # BlogPosts.objects.filter(title__icontains='hello')
     # BlogPosts.objects.filter(title__startswith='hello')
     obj = BlogPosts.objects.all() #try catch
-    print(request.user)
     template_name = "blog_post_list.html"
     context = {"objects": obj}
     return render(request, template_name, context)
@@ -35,8 +34,9 @@ Definition:
 @staff_member_required: Description
     Checks weather the logged in admin user is staff or not.
     Staff is a bloean field in User table.  
-        
 """
+
+
 @login_required(login_url="login/") #login url can be passed explicitly
 @staff_member_required # staff is a boolean field value in django admin User's database
 def blog_post_create(request):
@@ -52,6 +52,10 @@ def blog_post_create(request):
         # print(form.cleaned_data)
     # BlogPosts.objects.create(**form.cleaned_data) # key-word arguments(kwargs): https://stackoverflow.com/questions/1419046/normal-arguments-vs-keyword-arguments
     # form = BlogPostForm()
+
+    """ If not using authentication decorators, can check weather a user is authenticated using request.user.is_authenticated:"""
+    # if not request.user.is_authenticated:
+    #     return render(request,'error_template.html',context)
 
     # Using Model Form
     form = BlogPostModelForm(request.POST or None)
@@ -72,8 +76,6 @@ def blog_post_read(request,slug):
         # Django Exception Documentation: https://docs.djangoproject.com/en/2.2/ref/exceptions/
         raise Http404
 
-
-
     # another way of handelling does-not-exists exception
     # obj = get_object_or_404(BlogPosts,slug=slug)
 
@@ -81,12 +83,19 @@ def blog_post_read(request,slug):
     context = {"object":obj}
     return render(request,template_name,context)
 
+@staff_member_required
+def blog_post_update(request,slug):
 
-def blog_post_update(request):
-    obj = []
+    obj = get_object_or_404(BlogPosts,slug=slug)
+    form = BlogPostModelForm(request.POST or None,instance=obj)
+
+    if form.is_valid():
+        form.save()
+        return redirect("/blog/list")
+
     template_name = "blog_post_update.html"
-    context = {"object": obj}
-    return render(request, template_name, context)
+    context = {"form": form}
+    return render(request, template_name,context)
 
 
 def blog_post_delete(request):

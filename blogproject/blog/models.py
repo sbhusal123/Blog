@@ -16,6 +16,9 @@ User = get_user_model()
 
 class BlogPosts(models.Model):
     user = models.ForeignKey(User,default=1,on_delete=models.SET_NULL,null=True)
+    # default =1 is used to provide default value for user in this model from first entry in the User Table
+    # on_delete
+
     title = models.CharField(max_length=50,unique=True,blank=False)
     slug = models.SlugField() # basicaly used in lookup through URL.
     content = models.TextField(null=True,blank=True)
@@ -26,5 +29,5 @@ class BlogPosts(models.Model):
         super(BlogPosts,self).save(*args,**kwargs)
         return
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
