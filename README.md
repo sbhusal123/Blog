@@ -2,7 +2,7 @@
 Hands on django rest framework.
 
 ## 1. Installation ##
-Install the packages **django** on virtual environment:
+Install the packages **django,mysqlclient** on virtual environment:
 
     i.  pip install django    
     ii. pip install mysqlclient
@@ -65,9 +65,5 @@ DATABASES = {
 
 > Note: Everytime the database changes are made(*creating new tables, altering the tables*),then at first create the migrations and perform migration.
 
-
-
-
-
-
+1.3 Setting Up Template:
 

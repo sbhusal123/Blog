@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,8 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog' # are plug-able
 ]
+"""
+Django also lookes for existence of templates(strict name) folder in all the installed app directories.
+So no need to configure the app directories individually
+"""
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blogproject.urls'
 
+# Basically looks for templates folder in all the INSTALLED_APPS directories.
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -84,6 +90,7 @@ DATABASES = {
         'PORT':'3306',
         'OPTIONS': {
             'read_default_file': '/opt/lampp/etc/my.cnf',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
     }
 }

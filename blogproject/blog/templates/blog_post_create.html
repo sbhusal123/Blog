@@ -1,0 +1,23 @@
+{%extends 'base.html' %}
+
+{%block title%}
+    Create a new post-post
+{%endblock%}
+
+{%block content%}
+
+    <h1 align="center">New Blog Post</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <form action="." method="post">
+                    {%csrf_token%}
+                    {{form.as_p}}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

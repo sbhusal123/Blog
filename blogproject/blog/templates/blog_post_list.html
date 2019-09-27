@@ -1,0 +1,21 @@
+{%extends 'base.html' %}
+
+{%block title%}
+    Blog Posts Details
+{%endblock%}
+
+{%block content%}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <ul>
+                    {%for obj in objects%}
+                    <li><h5>{{obj.title}}</h5></li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
