@@ -1,9 +1,21 @@
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL # to use in model(as foreign key field) import from django.conf
+"""
+while in views :
+
+from djangp.contrib.auth import get_user_model
+
+User = get_user_model()
+"""
+
 
 # Create your models here.
 
 class BlogPosts(models.Model):
+    user = models.ForeignKey(User,default=1,on_delete=models.SET_NULL,null=True)
     title = models.CharField(max_length=50,unique=True,blank=False)
     slug = models.SlugField() # basicaly used in lookup through URL.
     content = models.TextField(null=True,blank=True)
