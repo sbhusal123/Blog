@@ -78,5 +78,67 @@ In **settings**.**py** provide the path of the templates file as:
     ]
 ```
 
+### 1.4 Setting Up Static files:
+Documentation: [Static Files Configuration](https://docs.djangoproject.com/en/2.2/howto/static-files/)
+
+Basically for static files(media,template assets,e.t.c) settings we need to define
+it's *URL*, *ROOT PATH*,*STATICFILES_DIR*.
+
+Suppose our Project directory to be structured as below:
+
+```
+blogproject
+    blogproject # created by default
+        settings.py 
+    blog #appname
+        templates # app_wise templates
+    staticfiles #local version of static files
+    templates # common templates
+static_cdn_test 
+    media
+    static
+    
+```
+Then the settings file can be configured as below: 
+
+```python
+STATIC_URL = '/static/' #URL to use when referring to static files located in STATIC_ROOT.
+
+LOCAL_STATIC_CDN_PATH = os.path.join(os.path.dirname(BASE_DIR),'static_cdn_test')
+# BASE_DIR = /home/user/Desktop/Django-Tutorial/blogproject
+# os.path.dirname(BASE_DIR) = #/home/user/Desktop/Django-Tutorial
+
+STATIC_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH,'static')
+
+STATICFILES_DIR = [  # basically performs lookup on the list of following directories
+    os.path.join(BASE_DIR,'staticfiles'),  # local version of static files
+    #path1,
+    #path2
+]
+
+# media, uploaded files storage location 
+MEDIA_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH,'media')
+MEDIA_URL = '/media/'
+```
+
+Finally to use those paths, modify **urls**.**py** as.:
+```python
+if settings.DEBUG:
+    # test mode
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+   
+
+
+  
+
+
+
+
+
+
+
 
 
