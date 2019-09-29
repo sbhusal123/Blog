@@ -8,6 +8,9 @@ from blog.models import BlogPosts
 
 def home_page(request):
     qs = BlogPosts.objects.all()[:5]
+    print("\n\n")
+    print(type(qs))
+    print("\n\n")
     context = {
         'blog_list' :qs
     }

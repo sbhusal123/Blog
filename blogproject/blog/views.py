@@ -2,18 +2,44 @@ from django.shortcuts import render,get_object_or_404, redirect
 from .models import BlogPosts
 from django.http import Http404
 from .forms import BlogPostForm,BlogPostModelForm
-from django.contrib.auth.decorators import login_required
+# from django.utils import timezone
+# from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required # staff member is a field in
 
 # Create your views here.
 
+"""
+Caution: Use try catch exception handling strategy while fetching objects.     
+"""
 
+
+"""
+    Filtering a published post. Two methods:
+        1. Filtering on each view where blog is being retrived. (violates DRY due to code redundancy)
+            from django.utils import timezone
+            now = timezone.now()
+            qs = BlogPosts.objects.filter(published_date__gte=now)
+                        
+        2. Using Custom Model Manager on model class.
+           -> Defined in the model class.
+"""
 
 def blog_post_list(request):
     # Filtering Approaches: Documentation: https://docs.djangoproject.com/en/2.2/ref/models/querysets/
     # BlogPosts.objects.filter(title__icontains='hello')
     # BlogPosts.objects.filter(title__startswith='hello')
-    obj = BlogPosts.objects.all() #try catch
+
+    """
+    Filtering weather the blog is published or not. Violates DRY. NOt to use this.
+        now = timezone.now()
+        obj = BlogPosts.objects.filter(published_date__gte=now) #try catch
+    """
+
+
+    obj = BlogPosts.objects.filter(title="Lorem Ipsum").published()
+    print("\n\n")
+    print(obj.query)
+    print("\n\n")
     template_name = "blog_post_list.html"
     context = {"objects": obj}
     return render(request, template_name, context)
@@ -26,24 +52,23 @@ def blog_post_list(request):
 
 Definition:
     1. @login_required # by default admin login is required. Basically checks the session
-       -> Can also be defined in settings.py file as: LOGIN_URL =".../". When defined no need to pass it explicitly 
-       -> as LOGIN_URL will be grabbed from settings.py file.
+       -> Can also be defined in settings.py file as: LOGIN_URL =".../". 
+       -> When defined in settings.py no need to pass it explicitly as LOGIN_URL will be grabbed from settings.py file.
          
-    2. @login_required(login_url=".../) #checks weather the user has loged in the '.../'
+    2. @login_required(login_url=".../") #checks weather the user has loged in the url '.../'
     
 @staff_member_required: Description
     Checks weather the logged in admin user is staff or not.
     Staff is a bloean field in User table.  
 """
-
-
-@login_required(login_url="login/") #login url can be passed explicitly
+# @login_required(login_url="login/") #login url can be passed explicitly
 @staff_member_required # staff is a boolean field value in django admin User's database
 def blog_post_create(request):
 
     """
-    Actually there are two strategies.
-    i.e Extending ModelForm or SimpleForm
+    Can be achieved using form. Actually there are two strategies.
+         1. Extending ModelForm (better strategy)
+         2.  SimpleForm
     """
 
     #Using Simple Form class
@@ -54,7 +79,7 @@ def blog_post_create(request):
     # form = BlogPostForm()
 
     """ If not using authentication decorators, can check weather a user is authenticated using request.user.is_authenticated:"""
-    # if not request.user.is_authenticated:
+    # if not request.user.is_authenticated: (for staff member: request.user.is_staff)
     #     return render(request,'error_template.html',context)
 
     # Using Model Form
@@ -71,7 +96,6 @@ def blog_post_create(request):
 def blog_post_read(request,slug):
     try:
         obj = BlogPosts.objects.get(slug= slug)
-
     except BlogPosts.DoesNotExist:
         # Django Exception Documentation: https://docs.djangoproject.com/en/2.2/ref/exceptions/
         raise Http404
