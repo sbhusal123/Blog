@@ -134,4 +134,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+
+"""
+Static files for files upload:    
+"""
+
+
 STATIC_URL = '/static/'
+
+
+"""
+    os.path.dirname(path): https://docs.python.org/2/library/os.path.html#os.path.dirname
+    Return the directory name of pathname path.
+"""
+LOCAL_STATIC_CDN_PATH = os.path.join(os.path.dirname(BASE_DIR),'static_cdn_test')
+# print(BASE_DIR) #/home/surya/Desktop/Django-Tutorial/blogproject
+# print(os.path.dirname(BASE_DIR)) #/home/surya/Desktop/Django-Tutorial
+
+
+STATIC_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH,'static')  # live cdn AWS S3
+
+STATICFILES_DIR = [  # basically performs lookup on the list of following directories
+    os.path.join(BASE_DIR,'staticfiles')  # local version of static files
+]
+
+MEDIA_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH,'media')
+MEDIA_URL = '/media/'
+
+

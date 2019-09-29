@@ -19,7 +19,7 @@ class BlogPosts(models.Model):
         on_delete = models.SET_NULL sets the user=NULL when corrosponding ForeignKey user is deleted    
     """
 
-
+    image = models.FileField(upload_to='images/',blank=True,null=True)
     title = models.CharField(max_length=50,unique=True,blank=False)
     slug = models.SlugField() # basicaly used in lookup through URL.
     content = models.TextField(null=True,blank=True)

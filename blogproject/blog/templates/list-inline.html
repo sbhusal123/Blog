@@ -1,9 +1,8 @@
 <div class="card mb-3">
-    <div class="card-body {%if not blog_post.published_date%} bg-dark text-light {%endif%}">
+    <div class="card-body {%if not blog_post.published_date%} border border-danger  {%endif%}">
         <h5 class="card-title">{{blog_post.title}}</h5>
         <small class="text-muted">{{blog_post.published_date}}</small>
         {% if truncate %}
-
             <p class="card-text">{{blog_post.content |linebreaks|truncatewords:30 }}</p>
         {% else %}
             <p class="card-text">{{blog_post.content |linebreaks }}</p>

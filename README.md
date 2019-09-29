@@ -65,5 +65,18 @@ DATABASES = {
 
 > Note: Everytime the database changes are made(*creating new tables, altering the tables*),then at first create the migrations and perform migration.
 
-1.3 Setting Up Template:
+### 1.3 Setting Up Template:
+In **settings**.**py** provide the path of the templates file as:
+```python
+    TEMPLATES = [
+        {
+            ...
+            'DIRS': [os.path.join(BASE_DIR,'templates')], # setting the templates directory
+            ...
+            ...
+        },
+    ]
+```
+
+
 
