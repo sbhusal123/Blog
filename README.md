@@ -19,7 +19,7 @@ Install python3-dev, build-essential,GCC builder to convert library into binarie
 
 
 
-### 1.1 Setup ###
+## 2 Setup ##
 i. Create a django project `django-admin startproject <project_name>`
 
 ii. Create an app switching to directory where **manage**.**py** is located:
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-### 1.2 Setting Up Database ###
+### 2.1 Setting Up Database ###
 First of all create a database named **<database_name>** then in the **settings**.**py** file change default database as :
 
 ```python
@@ -65,7 +65,7 @@ DATABASES = {
 
 > Note: Everytime the database changes are made(*creating new tables, altering the tables*),then at first create the migrations and perform migration.
 
-### 1.3 Setting Up Template:
+### 2.2 Setting Up Template:
 In **settings**.**py** provide the path of the templates file as:
 ```python
     TEMPLATES = [
@@ -78,7 +78,7 @@ In **settings**.**py** provide the path of the templates file as:
     ]
 ```
 
-### 1.4 Setting Up Static files:
+### 2.3 Setting Up Static files:
 Documentation: [Static Files Configuration](https://docs.djangoproject.com/en/2.2/howto/static-files/)
 
 Basically for static files(media,template assets,e.t.c) settings we need to define
