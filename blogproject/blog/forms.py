@@ -15,10 +15,11 @@ class BlogPostModelForm(forms.ModelForm):
     Even the fields can be modifled as below
     """
     title = forms.CharField()
+    published_date = forms.DateTimeField(widget=forms.SelectDateWidget)
     # content = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = BlogPosts
-        fields = ['title','content']
+        fields = ['title','content','published_date']
 
     def clean_title(self,*args,**kwargs):
         instance = self.instance

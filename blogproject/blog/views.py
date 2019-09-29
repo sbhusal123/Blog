@@ -36,12 +36,16 @@ def blog_post_list(request):
     """
 
 
-    obj = BlogPosts.objects.filter(title="Lorem Ipsum").published()
-    print("\n\n")
-    print(obj.query)
-    print("\n\n")
+    qs = BlogPosts.objects.all().published()
+
+    if request.user.is_authenticated:
+        my_qs = BlogPosts.objects.filter(user=request.user)
+        qs = (qs| my_qs).distinct()
+    # print("\n\n")
+    # print(qs.query)
+    # print("\n\n")
     template_name = "blog_post_list.html"
-    context = {"objects": obj}
+    context = {"objects": qs}
     return render(request, template_name, context)
 
 # CRUD for blog post- > Create, Read, Update, Delete

@@ -18,8 +18,7 @@ class BlogPostsQuerySet(models.QuerySet):
 
             Note: Make a instance of this (Manager class) in the Model class. 
         """
-        return self.filter(
-            published_date__gte=now)  # appends  `WHERE `blog_blogposts`.`published_date` >= 2019-09-29 04:10:26.953146`
+        return self.filter(published_date__lte=now)  # appends  `WHERE `blog_blogposts`.`published_date` >= 2019-09-29 04:10:26.953146`
 
 
 class BlogPostsManager(models.Manager):
