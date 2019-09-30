@@ -87,7 +87,7 @@ def blog_post_create(request):
     #     return render(request,'error_template.html',context)
 
     # Using Model Form
-    form = BlogPostModelForm(request.POST or None)
+    form = BlogPostModelForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
         form = BlogPostModelForm()

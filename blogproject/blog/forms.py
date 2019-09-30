@@ -19,7 +19,7 @@ class BlogPostModelForm(forms.ModelForm):
     # content = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = BlogPosts
-        fields = ['title','content','published_date']
+        fields = ['title','content','published_date','image']
 
     def clean_title(self,*args,**kwargs):
         instance = self.instance

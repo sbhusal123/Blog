@@ -2,6 +2,10 @@
     <div class="card-body {%if not blog_post.published_date%} border border-danger  {%endif%}">
         <h5 class="card-title">{{blog_post.title}}</h5>
         <small class="text-muted">{{blog_post.published_date}}</small>
+        {%if blog_post.image%}
+            <img src="{{blog_post.image.url}}" class="card-img-top">
+        {%endif%}
+
         {% if truncate %}
             <p class="card-text">{{blog_post.content |linebreaks|truncatewords:30 }}</p>
         {% else %}
