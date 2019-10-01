@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.conf import settings
-from .managers import BlogPostsQuerySet,BlogPostsManager
+from .managers import BlogPostsManager
 
 # get the user model from django admin
 User = settings.AUTH_USER_MODEL

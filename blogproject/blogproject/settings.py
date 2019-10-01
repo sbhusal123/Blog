@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog' # are plug-able
+    'blog', # are plug-able
+    'searches',
 ]
 """
 Django also lookes for existence of templates(strict name) folder in all the installed app directories.

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path,include
+from searches.views import search_view
 from . import views
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('contact/',views.contact),
 
     path('admin/', admin.site.urls),
+    path('search/',include('searches.urls'))
 ]
 
 
