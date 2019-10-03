@@ -1,5 +1,5 @@
-# Django Tutorials #
-Hands on django rest framework.
+# Blog Project#
+
 
 ## 1. Installation ##
 Install the packages **django,mysqlclient** on virtual environment:
